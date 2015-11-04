@@ -2,19 +2,23 @@
 using System.Diagnostics;
 using System.IO;
 using log4net.Config;
+using log4net;
 using Quartz;
 using Topshelf;
 using Topshelf.Nancy;
 using Topshelf.Quartz;
+using WebSite.Lib;
 
 namespace WebSite {
-    static class Program {
+    public static class Program {
+        #region Memebers
         private static readonly String ApplicationName = "Application";
+        private static readonly ILog logger = LogManager.GetLogger(typeof(Program));
+        #endregion
 
-        public static void Main(string[] args) {
+        public static void Main() {
             // Run Visual Studio as Administrator or the ports will not be opened.
-
-            XmlConfigurator.ConfigureAndWatch(new FileInfo(@"log4net.config"));
+            XmlConfigurator.ConfigureAndWatch(new FileInfo(@"./log4net.config"));
 
             var host = HostFactory.New(hostConfiguration => {
                 hostConfiguration.UseLog4Net();
@@ -22,12 +26,16 @@ namespace WebSite {
                 hostConfiguration.Service<NancySelfHost>(serviceFactoryBuilder => {
                     serviceFactoryBuilder.ScheduleQuartzJob(
                         quartzConfigurator => quartzConfigurator.WithJob(() => JobBuilder.Create<MainJob>().Build())
-                        .AddTrigger(() => TriggerBuilder.Create().WithSimpleSchedule(builder => builder.WithIntervalInSeconds(5).RepeatForever()).Build())
+                        .AddTrigger(
+                                    () => TriggerBuilder.Create().WithSimpleSchedule(
+                                                                                        builder => builder.WithIntervalInSeconds(5).RepeatForever()
+                                                                                     ).Build()
+                                   )
                     );
 
                     serviceFactoryBuilder.WithNancyEndpoint(hostConfiguration, nancyConfigurator => {
-                        nancyConfigurator.AddHost(scheme: NancySelfHost.DomainSchema, domain: NancySelfHost.LocalhostDomainName, port: NancySelfHost.DomainPortNumber);
-                        nancyConfigurator.AddHost(scheme: NancySelfHost.DomainSchema, domain: NancySelfHost.MachineDomainName, port: NancySelfHost.DomainPortNumber);
+                        nancyConfigurator.AddHost(scheme: NancySelfHost.DomainSchema, domain: NancySelfHost.LocalhostDomainName, port: NancySelfHost.LocalhostDomainPortNumber);
+                        nancyConfigurator.AddHost(scheme: NancySelfHost.DomainSchema, domain: NancySelfHost.MachineDomainName, port: NancySelfHost.MachineDomainPortNumber);
                         nancyConfigurator.CreateUrlReservationsOnInstall();
                         nancyConfigurator.DeleteReservationsOnUnInstall();
                         nancyConfigurator.OpenFirewallPortsOnInstall(firewallRuleName: ApplicationName + "." + "FirewallRule");
@@ -66,19 +74,10 @@ namespace WebSite {
                 hostConfiguration.StartAutomatically();
             });
 
-            host.Run();
+            if (Environment.UserInteractive)
+                Process.Start(NancySelfHost.DomainSchema + "://" + NancySelfHost.LocalhostDomainName + ":" + NancySelfHost.LocalhostDomainPortNumber);
 
-            if (Environment.UserInteractive) {
-                var uriText = NancySelfHost.DomainSchema + "://" + NancySelfHost.LocalhostDomainName + ":" + NancySelfHost.DomainPortNumber;
-                Process.Start(uriText);
-                Console.WriteLine("Press any key to Shutdown " + ApplicationName + ".");
-                Console.ReadKey();
-            }
-        }
-        public class MainJob : IJob {
-            public void Execute(IJobExecutionContext argIJobExecutionContext) {
-                Console.WriteLine("The current time is: {0}", DateTime.Now);
-            }
+            host.Run();
         }
     }
 }

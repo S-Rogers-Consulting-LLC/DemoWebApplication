@@ -97,16 +97,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lib\MainJob.cs" />
     <Compile Include="Modules\Bootstrapper.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\RestModule.cs" />
-    <Compile Include="NancySelfHost.cs" />
+    <Compile Include="Lib\NancySelfHost.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="log4net.config" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

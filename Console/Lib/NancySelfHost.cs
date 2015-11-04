@@ -1,19 +1,25 @@
 ﻿using System;
+using log4net;
 using Nancy.Hosting.Self;
 
-namespace WebSite {
+namespace WebSite.Lib {
     public class NancySelfHost {
-        public static readonly Int32 DomainPortNumber = 5000;
+        #region Members
+        private static readonly ILog logger = LogManager.GetLogger(typeof(NancySelfHost));
+
+        public static readonly Int32 MachineDomainPortNumber = 5010;
         public static readonly String MachineDomainName = Environment.MachineName;
+        public static readonly Int32 LocalhostDomainPortNumber = 5011;
         public static readonly String LocalhostDomainName = @"localhost";
         public static readonly String DomainSchema = @"http";
 
         private NancyHost TheNancyHost;
+        #endregion
 
         public NancySelfHost() { }
 
         public void Start() {
-            var uriText = DomainSchema + "://" + LocalhostDomainName + ":" + DomainPortNumber;
+            var uriText = DomainSchema + "://" + LocalhostDomainName + ":" + MachineDomainPortNumber;
             TheNancyHost = new NancyHost(new Uri(uriText));
             TheNancyHost.Start();
         }
