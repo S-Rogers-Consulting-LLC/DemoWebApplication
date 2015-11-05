@@ -55,6 +55,10 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\packages\Common.Logging.Core.3.3.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -97,33 +101,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Lib\Facebook\CombinationStream.cs" />
-    <Compile Include="Lib\Facebook\DateTimeConvertor.cs" />
-    <Compile Include="Lib\Facebook\FacebookApiEventArgs.cs" />
-    <Compile Include="Lib\Facebook\FacebookApiException.cs" />
-    <Compile Include="Lib\Facebook\FacebookApiLimitException.cs" />
-    <Compile Include="Lib\Facebook\FacebookBatchParameter.cs" />
-    <Compile Include="Lib\Facebook\FacebookClient.Async.cs" />
-    <Compile Include="Lib\Facebook\FacebookClient.Async.Tasks.cs" />
-    <Compile Include="Lib\Facebook\FacebookClient.Batch.Async.cs" />
-    <Compile Include="Lib\Facebook\FacebookClient.Batch.Async.Tasks.cs" />
-    <Compile Include="Lib\Facebook\FacebookClient.Batch.Sync.cs" />
-    <Compile Include="Lib\Facebook\FacebookClient.cs" />
-    <Compile Include="Lib\Facebook\FacebookClient.OAuthResult.cs" />
-    <Compile Include="Lib\Facebook\FacebookClient.SignedRequest.cs" />
-    <Compile Include="Lib\Facebook\FacebookClient.Subscription.cs" />
-    <Compile Include="Lib\Facebook\FacebookClient.Sync.cs" />
-    <Compile Include="Lib\Facebook\FacebookMediaObject.cs" />
-    <Compile Include="Lib\Facebook\FacebookMediaStream.cs" />
-    <Compile Include="Lib\Facebook\FacebookOAuthException.cs" />
-    <Compile Include="Lib\Facebook\FacebookOAuthResult.cs" />
-    <Compile Include="Lib\Facebook\FacebookUploadProgressChangedEventArgs.cs" />
-    <Compile Include="Lib\Facebook\GlobalSuppressions.cs" />
-    <Compile Include="Lib\Facebook\HttpHelper.cs" />
-    <Compile Include="Lib\Facebook\HttpMethod.cs" />
-    <Compile Include="Lib\Facebook\HttpWebRequestCreatedEventArgs.cs" />
-    <Compile Include="Lib\Facebook\SimpleJson.cs" />
-    <Compile Include="Lib\Facebook\TaskExtensions.cs" />
     <Compile Include="Lib\MainJob.cs" />
     <Compile Include="Modules\Bootstrapper.cs" />
     <Compile Include="Modules\MainModule.cs" />
