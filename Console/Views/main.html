@@ -3,16 +3,24 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Knockout.js</title>
+    <title>Main</title>
+    <link rel="icon" href="/favicon.ico">
+    <link href="Content/bootstrap.css" rel="stylesheet">
+    <link href="Content/bootstrap-theme.css" rel="stylesheet">
+    <script type='text/javascript' src='Scripts/knockout-3.3.0.js'></script>
+    <script type='text/javascript' src="Scripts/jquery-2.1.4.js"></script>
+    <script type='text/javascript' src="Scripts/bootstrap.js"></script>
 </head>
 <body>
-    <script type='text/javascript' src='Scripts/knockout-3.3.0.js'></script>
-    <script type='text/javascript' src="Scripts/jquery.js"></script>
-
-    <p>First name: <input data-bind="value: firstName" /></p>
-    <p>Last name: <input data-bind="value: lastName" /></p>
-    <h2>Hello, <span data-bind="text: fullName"> </span>!</h2>
-
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">@</span>
+        <input type="text" class="form-control" placeholder="First Name" aria-describedby="sizing-addon3" data-bind="value: firstName">
+    </div>
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">@</span>
+        <input type="text" class="form-control" placeholder="Last Name" aria-describedby="sizing-addon3" data-bind="value: lastName">
+    </div>
+    <span class="label-default" data-bind="text: fullName"> </span>
 
     <script type="text/javascript">
         var ViewModel = function (first, last) {
