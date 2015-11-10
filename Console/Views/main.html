@@ -4,32 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <title>Main</title>
-    <link rel="icon" href="/favicon.ico">
-    <link href="Content/bootstrap.css" rel="stylesheet">
-    <link href="Content/bootstrap-theme.css" rel="stylesheet">
-    <script type='text/javascript' src='Scripts/knockout-3.3.0.js'></script>
-    <script type='text/javascript' src="Scripts/jquery-2.1.4.js"></script>
-    <script type='text/javascript' src="Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="Scripts/require.js" data-main="Scripts/main.js"></script>
 </head>
 <body>
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">@</span>
+        <span class="input-group-addon">1.</span>
         <input type="text" class="form-control" placeholder="First Name" aria-describedby="sizing-addon3" data-bind="value: firstName">
     </div>
     <div class="input-group input-group-sm">
-        <span class="input-group-addon">@</span>
+        <span class="input-group-addon">2.</span>
         <input type="text" class="form-control" placeholder="Last Name" aria-describedby="sizing-addon3" data-bind="value: lastName">
     </div>
     <span class="label-default" data-bind="text: fullName"> </span>
-
-    <script type="text/javascript">
-        var ViewModel = function (first, last) {
-            this.firstName = ko.observable(first);
-            this.lastName = ko.observable(last);
-            this.fullName = ko.pureComputed(function () { return this.firstName() + " " + this.lastName(); }, this);
-        };
-
-        ko.applyBindings(new ViewModel("Stewart", "Rogers"));
-    </script>
 </body>
 </html>
