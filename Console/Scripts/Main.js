@@ -10,9 +10,9 @@ require(["Scripts/jquery-2.1.4.js", "Scripts/bootstrap.js", "Scripts/knockout-3.
     ko.components.register("textbox-component", {
         viewModel: function (params) {
             var self = this;
-            self.caption = ko.observable(params.initialCaption);
-            self.placeholder = ko.observable(params.initialPlaceholder);
-            self.value = ko.observable(params.initialValue);
+            self.caption = params.initialCaption;
+            self.placeholder = params.initialPlaceholder;
+            self.value = params.value;
         },
         template: '<div class="input-group input-group-sm">'
                     + '<span class="input-group-addon" data-bind="text: caption"></span>'
@@ -20,14 +20,35 @@ require(["Scripts/jquery-2.1.4.js", "Scripts/bootstrap.js", "Scripts/knockout-3.
                   + '</div>'
     });
 
+    ko.components.register("label-component", {
+        viewModel: function (params) {
+            var self = this;
+            self.caption = params.initialCaption;
+            self.value = params.value;
+        },
+        template: '<div class="input-group input-group-sm">'
+                    + '<span class="input-group-addon" data-bind="text: caption"></span>'
+                    + '<span class="form-control" aria-describedby="sizing-addon3" data-bind="text: value">'
+                  + '</div>'
+    });
+
+    ko.components.register("button-component", {
+        viewModel: function (params) {
+            var self = this;
+            self.caption = params.initialCaption;
+            self.onclick = params.onclick;
+        },
+        template: '<div class="input-group input-group-sm"><input type="button" class="btn btn-default navbar-btn" data-bind="attr: {onclick: onclick}, value: caption"></div>'
+    });
+
     var ViewModel = function (first, last) {
         var self = this;
         self.firstName = ko.observable(first);
         self.lastName = ko.observable(last);
-        self.fullName = ko.pureComputed(function () { return self.firstName() + " " + self.lastName(); }, this);
+        self.fullName = ko.pureComputed(function () { return self.firstName() + " " + self.lastName(); }, self);
     };
 
-    ko.applyBindings(new ViewModel("Stewart", "Rogers"));
+    ko.applyBindings(new ViewModel("a", "b"));
 })
 
 
