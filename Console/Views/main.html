@@ -3,10 +3,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Main</title>
+    <title>Main</title>   
     <script type="text/javascript" src="Scripts/require.js" data-main="Scripts/main.js"></script>
 </head>
 <body>
+    <textbox-component params='initialCaption: "0.", initialPlaceholder: "Type Something!", initialValue: "abcdef"'></textbox-component>
+
     <div class="input-group input-group-sm">
         <span class="input-group-addon">1.</span>
         <input type="text" class="form-control" placeholder="First Name" aria-describedby="sizing-addon3" data-bind="value: firstName">
@@ -16,5 +18,6 @@
         <input type="text" class="form-control" placeholder="Last Name" aria-describedby="sizing-addon3" data-bind="value: lastName">
     </div>
     <span class="label-default" data-bind="text: fullName"> </span>
+   
 </body>
 </html>
