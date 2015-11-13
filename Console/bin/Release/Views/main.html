@@ -3,12 +3,18 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Main</title>   
+    <title>Main</title>
     <script type="text/javascript" src="Scripts/require.js" data-main="Scripts/main.js"></script>
 </head>
 <body>
-    <textbox-component params='initialCaption: "1.", initialPlaceholder: "First Name", initialValue: firstName'></textbox-component>
-    <textbox-component params='initialCaption: "2.", initialPlaceholder: "Last Name", initialValue: lastName'></textbox-component>
-    <span class="label-default" data-bind="text: fullName"> </span>   
+    <panel-component>
+        If only I could include Knockout Components as children.
+    </panel-component>
+
+    <textbox-component params='initialCaption: "1.", initialPlaceholder: "First Name", value: firstName'></textbox-component>
+    <textbox-component params='initialCaption: "2.", initialPlaceholder: "Last Name", value: lastName'></textbox-component>
+    <label-component params='initialCaption: "3.", value: fullName'></label-component>
+
+    <button-component params='initialCaption: "Button", onclick: "alert(\"Hi!!!\")"'></button-component>
 </body>
 </html>

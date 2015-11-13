@@ -6,6 +6,13 @@ loadCss("Content/bootstrap.css");
 loadCss("Content/bootstrap-theme.css");
 
 require(["Scripts/jquery-2.1.4.js", "Scripts/bootstrap.js", "Scripts/knockout-3.3.0.js"], function ($, b, ko) {
+    console.debug('components loaded');
+    ko.components.register("panel-component", {
+        template: '<div class="panel panel-default">'
+                    + '<div class="panel-body" data-bind="template: { nodes: $componentTemplateNodes }">'
+                    + '</div>'
+                + '</div>'
+    });
 
     ko.components.register("textbox-component", {
         viewModel: function (params) {
