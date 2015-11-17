@@ -7,14 +7,21 @@
     <script type="text/javascript" src="Scripts/require.js" data-main="Scripts/main.js"></script>
 </head>
 <body>
-    <panel-component>
-        If only I could include Knockout Components as children.
-    </panel-component>
+    <textbox-component params='initialId: 1, width: "20px", initialPlaceholder: "First Name", value: firstName'></textbox-component>
+    <textbox-component params='initialId: 2, width: "20px", initialPlaceholder: "Last Name", value: lastName'></textbox-component>
+    <label-component   params='initialId: 3, width: "50px", value: fullName'></label-component>
 
-    <textbox-component params='initialCaption: "1.", initialPlaceholder: "First Name", value: firstName'></textbox-component>
-    <textbox-component params='initialCaption: "2.", initialPlaceholder: "Last Name", value: lastName'></textbox-component>
-    <label-component params='initialCaption: "3.", value: fullName'></label-component>
+    <button-component  params='initialId: 4, width: "20px", initialCaption: "Button", onclick: "alert(\"Hi!!!\")"'></button-component>
 
-    <button-component params='initialCaption: "Button", onclick: "alert(\"Hi!!!\")"'></button-component>
+    <script type="text/javascript">
+        var ViewModel = function (first, last) {
+            var self = this;
+            self.firstName = ko.observable(first);
+            self.lastName = ko.observable(last);
+            self.fullName = ko.pureComputed(function () { return self.firstName() + " " + self.lastName(); }, self);
+        };
+
+        ko.applyBindings(new ViewModel("a", "b"));
+    </script>
 </body>
 </html>

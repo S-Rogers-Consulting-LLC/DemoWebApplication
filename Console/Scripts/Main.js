@@ -2,51 +2,46 @@
 function loadIcon(url) { var iconLink = document.createElement("link"); iconLink.rel = "icon"; iconLink.href = url; document.getElementsByTagName("head")[0].appendChild(iconLink); }
 
 loadIcon("Images/favicon.ico");
-loadCss("Content/bootstrap.css");
-loadCss("Content/bootstrap-theme.css");
+loadCss("Content/w2ui-1.4.3.css");
 
-require(["Scripts/jquery-2.1.4.js", "Scripts/bootstrap.js", "Scripts/knockout-3.3.0.js"], function ($, b, ko) {
-    console.debug('components loaded');
-    ko.components.register("panel-component", {
-        template: '<div class="panel panel-default">'
-                    + '<div class="panel-body" data-bind="template: { nodes: $componentTemplateNodes }">'
-                    + '</div>'
-                + '</div>'
-    });
+require(["Scripts/jquery-2.1.4.js", "Scripts/w2ui-1.4.3.js", "Scripts/knockout-3.3.0.debug.js"], function ($, w2, ko) {
+    console.debug('start components load.');
 
     ko.components.register("textbox-component", {
         viewModel: function (params) {
             var self = this;
-            self.caption = params.initialCaption;
+            self.id = params.initialId;           
+            self.width = params.width;
             self.placeholder = params.initialPlaceholder;
             self.value = params.value;
         },
-        template: '<div class="input-group input-group-sm">'
-                    + '<span class="input-group-addon" data-bind="text: caption"></span>'
-                    + '<input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon3" data-bind="attr: {placeholder: placeholder}, value: value">'
-                  + '</div>'
+        template: '<input id="" placeholder="" data-bind="attr: {id: id, placeholder: placeholder}, value: value" style="border: 1px solid silver; padding: 3px;" type="text">'
     });
 
     ko.components.register("label-component", {
         viewModel: function (params) {
             var self = this;
-            self.caption = params.initialCaption;
+            self.id = params.initialId;
+            self.width = params.width;
             self.value = params.value;
         },
-        template: '<div class="input-group input-group-sm">'
-                    + '<span class="input-group-addon" data-bind="text: caption"></span>'
-                    + '<span class="form-control" aria-describedby="sizing-addon3" data-bind="text: value">'
-                  + '</div>'
+        template: '<span id="" data-bind="attr: {id: id}, text: value" style="border: 1px solid silver; padding: 3px;"></span>'
     });
 
     ko.components.register("button-component", {
         viewModel: function (params) {
             var self = this;
+            self.id = params.initialId;
+            self.width = params.width;
             self.caption = params.initialCaption;
             self.onclick = params.onclick;
         },
-        template: '<div class="input-group input-group-sm"><input type="button" class="btn btn-default navbar-btn" data-bind="attr: {onclick: onclick}, value: caption"></div>'
+        template: '<input id="" data-bind="attr: {id: id, onclick: onclick}, value: caption" style="border: 1px solid silver; padding: 3px;" type="button">'
     });
+
+    console.debug('stop components load.');
+
+    
 
     var ViewModel = function (first, last) {
         var self = this;
@@ -56,6 +51,8 @@ require(["Scripts/jquery-2.1.4.js", "Scripts/bootstrap.js", "Scripts/knockout-3.
     };
 
     ko.applyBindings(new ViewModel("a", "b"));
+
+   
 })
 
 
